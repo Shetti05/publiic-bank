@@ -1,0 +1,21 @@
+pipeline{
+agent any
+tools{
+mava 'local mavan'
+}
+stages{
+stages(('buliod'){
+steps{
+sh'mvn clean package'
+}
+post{
+succes{
+echo"Archiving the Artifacts"
+archiveArtifacts.Artifacts: '**/target/*.war'
+}
+}
+}
+stages('Display to tomcat server'){
+}
+}
+}
